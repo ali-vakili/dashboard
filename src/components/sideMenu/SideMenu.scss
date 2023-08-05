@@ -31,7 +31,7 @@
   color: $SixthBlack !important;
 }
 
-.ant-menu-item:not(.ant-menu-item-selected), .ant-menu-submenu:not(.ant-menu-submenu-selected) {
+.ant-menu-item:not(.ant-menu-item-selected), .ant-menu-submenu:not(.ant-menu-submenu-open) {
   color: $SixthBlack !important;
 }
 
