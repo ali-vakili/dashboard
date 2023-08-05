@@ -1,0 +1,67 @@
+@use "../../assets/scss/forward" as *;
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: $side-bar-bg;
+  overflow: auto;
+  height: 100%;
+
+  .logo{
+    display: inline-block;
+    margin-bottom: 64px;
+  }
+}
+
+.ant-menu-item-group-title {
+  text-transform: uppercase;
+  font-size: 12px !important;
+  font-weight: 500;
+  padding: 16px 0 !important;
+  color: $SixthBlack !important;
+}
+
+.ant-menu-item-group-title {
+  font-size: 12px !important;
+  font-weight: 500;
+  padding-top: 24px !important;
+  padding-bottom: 16px !important;
+  color: $SixthBlack !important;
+}
+
+.ant-menu-item:not(.ant-menu-item-selected), .ant-menu-submenu:not(.ant-menu-submenu-selected) {
+  color: $SixthBlack !important;
+}
+
+.ant-menu-sub {
+  border-radius: 8px !important;
+}
+
+.ant-menu-root {
+
+  li.ant-menu-item:not(.ant-menu-item-only-child) , .ant-menu-submenu-title {
+    padding: 0 !important;
+    padding-inline: 8px !important;
+    font-size: 16px !important;
+  }
+}
+
+ul:not([id]) {
+  .ant-menu-submenu, .ant-menu-item{
+    font-weight: 400;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .ant-menu-submenu-title{
+
+      .ant-menu-title-content{
+        font-size: 16px !important;
+      }
+    }
+  }
+}
