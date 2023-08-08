@@ -1,0 +1,14 @@
+@use "./assets/scss/forward" as *;
+
+.layout {
+  width: 100%;
+  transition: all 300ms ease-out;
+
+  @include media(">Slaptop") {
+    padding-left: 280px;
+  }
+
+  .content-wrapper {
+    padding: 40px;
+  }
+}

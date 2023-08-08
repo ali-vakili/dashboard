@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
+import { Sidebar, sidebarClasses } from 'react-pro-sidebar';
 import GridViewIcon from '@mui/icons-material/GridView';
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import DesignServicesOutlinedIcon from '@mui/icons-material/DesignServicesOutlined';
@@ -75,7 +76,32 @@ const SideMenu: React.FC = () => {
   };
 
   return (
-    <aside className='side-menu p-4'>
+    <Sidebar 
+      rootStyles={{
+        position: 'fixed',
+        top: '0',
+        bottom: '0',
+        left: '0',
+        backgroundColor: '#161616',
+        overflow: 'auto',
+        height: '100%',
+        border: 'none',
+        width: '280px',
+        transition: 'width, left, right, 300ms, easeOut',
+        [`.${sidebarClasses.container}`]: {
+          backgroundColor: '#161616',
+          padding: '24px',
+          overflow: 'unset',
+          height: 'unset'
+        },
+        [`.${sidebarClasses.backdrop}`]: {
+          backgroundColor: '#ffffff08',
+        }
+      }}
+      toggled={false}
+      breakPoint="lg"
+    >
+
       <span className='logo' role='logo'>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clip-path="url(#clip0_1655_544)">
@@ -95,7 +121,7 @@ const SideMenu: React.FC = () => {
         selectedKeys={[current]}
         mode="inline"
       />
-    </aside>
+    </Sidebar>
   );
 };
 

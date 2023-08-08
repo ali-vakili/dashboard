@@ -1,13 +1,19 @@
 @use "../../assets/scss/forward" as *;
 
-.side-menu {
+.ps-sidebar-root {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   background-color: $side-bar-bg;
   overflow: auto;
   height: 100%;
+
+  &.ps-broken {
+    left: -280px !important;
+  }
+
+  &.ps-toggled {
+    left: 0 !important;
+  }
 
   .logo{
     display: inline-block;
@@ -40,6 +46,7 @@
 }
 
 .ant-menu-root {
+  width: unset !important;
 
   li.ant-menu-item:not(.ant-menu-item-only-child) , .ant-menu-submenu-title {
     padding: 0 !important;
