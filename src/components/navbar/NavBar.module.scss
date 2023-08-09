@@ -1,0 +1,25 @@
+@use "../../assets/scss/forward" as *;
+
+
+.navbar {
+  padding: 20px 40px;
+
+  @include media("<Stablet") {
+    padding: 20px;
+  }
+}
+
+.menu {
+  border: none;
+  padding: 8px;
+  background-color: #202020;
+  transition: background-color 600ms ease;
+
+  @include media(">=Slaptop") {
+    display: none;
+  }
+
+  &:hover {
+    background-color: $Primary;
+  }
+}

@@ -10,5 +10,9 @@
 
   .content-wrapper {
     padding: 40px;
+
+    @include media("<Stablet") {
+      padding: 40px 20px;
+    }
   }
 }

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { MenuToggled } from "../../App"
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { Sidebar, sidebarClasses } from 'react-pro-sidebar';
@@ -67,8 +68,10 @@ const items: MenuItem[] = [
   ]),
 ];
 
-const SideMenu: React.FC = () => {
+const SideMenu: React.FC = ({ closeAndOpenMenu }) => {
   const [current, setCurrent] = useState('');
+  const menuContext = useContext(MenuToggled);
+  const { isMenuOpen, setIsMenuOpen } = menuContext;
 
 
   const onClick: MenuProps['onClick'] = (e) => {
@@ -95,11 +98,12 @@ const SideMenu: React.FC = () => {
           height: 'unset'
         },
         [`.${sidebarClasses.backdrop}`]: {
-          backgroundColor: '#ffffff08',
+          backgroundColor: '#16b8f314',
         }
       }}
-      toggled={false}
+      toggled={isMenuOpen === "open" ? true: isMenuOpen === "close" ? false : false}
       breakPoint="lg"
+      onBackdropClick={() => {{setIsMenuOpen?.("close"), closeAndOpenMenu()}}}
     >
 
       <span className='logo' role='logo'>
