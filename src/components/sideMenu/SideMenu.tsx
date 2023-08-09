@@ -68,7 +68,11 @@ const items: MenuItem[] = [
   ]),
 ];
 
-const SideMenu: React.FC = ({ closeAndOpenMenu }) => {
+type SideMenuProps = {
+  closeAndOpenMenu: () => void;
+};
+
+const SideMenu: React.FC<SideMenuProps> = ({ closeAndOpenMenu }) => {
   const [current, setCurrent] = useState('');
   const menuContext = useContext(MenuToggled);
   const { isMenuOpen, setIsMenuOpen } = menuContext;

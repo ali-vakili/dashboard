@@ -4,7 +4,11 @@ import { MenuToggled } from "../../App"
 
 import styles from "./NavBar.module.scss"
 
-const NavBar : React.FC = ({ closeAndOpenMenu }) => {
+type NavBarProps = {
+  closeAndOpenMenu: () => void;
+};
+
+const NavBar : React.FC<NavBarProps> = ({ closeAndOpenMenu }) => {
   const menuContext = useContext(MenuToggled);
   const { isSmallScreen, setIsMenuOpen } = menuContext;
 
