@@ -15,7 +15,7 @@
   background-color: #202020;
   transition: background-color 600ms ease;
 
-  @include media(">=Slaptop") {
+  @include media(">Slaptop") {
     display: none;
   }
 
