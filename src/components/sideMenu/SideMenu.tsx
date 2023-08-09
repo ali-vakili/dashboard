@@ -99,7 +99,8 @@ const SideMenu: React.FC<SideMenuProps> = ({ closeAndOpenMenu }) => {
           backgroundColor: '#161616',
           padding: '24px',
           overflow: 'unset',
-          height: '100%'
+          height: 'fit-content',
+          minHeight: '100%'
         },
         [`.${sidebarClasses.backdrop}`]: {
           backgroundColor: '#16b8f314',
