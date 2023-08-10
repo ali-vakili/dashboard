@@ -11,7 +11,7 @@ import "./App.scss"
 
 // types
 type MenuContextValue = {
-  isMenuOpen: { toggle: boolean; }
+  isMenuOpen: { toggle: boolean }
   dispatch: React.Dispatch<ACTIONTYPE>;
 };
 
@@ -31,7 +31,7 @@ const App: React.FC = () => {
     isMenuOpen,
     dispatch
   };
-  
+
   useEffect(() => {
     !isSmallScreen && dispatch({ type: "close" });
 
