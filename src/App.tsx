@@ -1,47 +1,43 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useReducer, useEffect } from 'react';
 import tokens from "./AntDesignTheme.json"
 import { ConfigProvider, theme  } from 'antd';
 import { useMediaQuery } from "react-responsive";
 import SideMenu from "./components/sideMenu/SideMenu";
 import Content from "./components/content/Content";
 import NavBar from './components/navbar/NavBar';
+import { initialState, reducer, ACTIONTYPE } from './components/utils/Menu';
 
 import "./App.scss"
 
+// types
 type MenuContextValue = {
-  isMenuOpen: 'open' | 'close';
-  isSmallScreen?: boolean;
-  setIsMenuOpen?: React.Dispatch<React.SetStateAction<'open' | 'close'>>;
+  isMenuOpen: { toggle: boolean; }
+  dispatch: React.Dispatch<ACTIONTYPE>;
 };
 
-export const MenuToggled = createContext<MenuContextValue>({isMenuOpen: "close"});
+
+// contexts
+export const MenuToggled = createContext<MenuContextValue | undefined>(undefined);
+export const SmallScreen = createContext(false);
+
 
 const App: React.FC = () => {
 
   const isSmallScreen: boolean = useMediaQuery({ maxWidth: 992 });
   
-  const [isMenuOpen, setIsMenuOpen] = useState<MenuContextValue['isMenuOpen']>("close");
-
-  useEffect(() => {
-    !isSmallScreen && setIsMenuOpen("close");
-    if (!isSmallScreen) {
-      if (document.body.classList.contains("menu-opened")){
-        document.body.classList.remove("menu-opened")
-      }
-    }
-
-  }, [isSmallScreen])
-
-  const closeAndOpenMenu: () => void = () => {
-    document.body.classList.toggle("menu-opened");
-  }
+  const [isMenuOpen, dispatch] = useReducer(reducer, initialState);
 
   const menuContextValue = {
     isMenuOpen,
-    isSmallScreen,
-    setIsMenuOpen
+    dispatch
   };
+  
+  useEffect(() => {
+    !isSmallScreen && dispatch({ type: "close" });
 
+  }, [isSmallScreen])
+
+  
   return (
     <ConfigProvider
       theme={{
@@ -51,13 +47,15 @@ const App: React.FC = () => {
     >
       <div className="admin-dashboard">
         <MenuToggled.Provider value={menuContextValue}>
-          <SideMenu closeAndOpenMenu={closeAndOpenMenu}/>
-          <div className="layout">
-            <NavBar closeAndOpenMenu={closeAndOpenMenu}/>
-            <div className="content-wrapper container-xxl">
-              <Content />
+          <SmallScreen.Provider value={isSmallScreen}>
+            <SideMenu />
+            <div className="layout">
+              <NavBar />
+              <div className="content-wrapper container-xxl">
+                <Content />
+              </div>
             </div>
-          </div>
+          </SmallScreen.Provider>
         </MenuToggled.Provider>
       </div>
     </ConfigProvider>

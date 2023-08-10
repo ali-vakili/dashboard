@@ -68,15 +68,9 @@ const items: MenuItem[] = [
   ]),
 ];
 
-type SideMenuProps = {
-  closeAndOpenMenu: () => void;
-};
-
-const SideMenu: React.FC<SideMenuProps> = ({ closeAndOpenMenu }) => {
+const SideMenu: React.FC = () => {
   const [current, setCurrent] = useState('');
-  const menuContext = useContext(MenuToggled);
-  const { isMenuOpen, setIsMenuOpen } = menuContext;
-
+  const { isMenuOpen, dispatch } = useContext(MenuToggled) ?? {};
 
   const onClick: MenuProps['onClick'] = (e) => {
     setCurrent(e.key);
@@ -106,9 +100,9 @@ const SideMenu: React.FC<SideMenuProps> = ({ closeAndOpenMenu }) => {
           backgroundColor: '#16b8f314',
         }
       }}
-      toggled={isMenuOpen === "open" ? true: isMenuOpen === "close" ? false : false}
+      toggled={isMenuOpen?.toggle ?? false}
       breakPoint="lg"
-      onBackdropClick={() => {{setIsMenuOpen?.("close"), closeAndOpenMenu()}}}
+      onBackdropClick={() => {dispatch?.({type: "close"})}}
     >
 
       <span className='logo' role='logo'>
