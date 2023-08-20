@@ -70,7 +70,7 @@ const items: MenuItem[] = [
 
 const SideMenu: React.FC = () => {
   const [current, setCurrent] = useState('');
-  const { isMenuOpen, dispatch } = useContext(MenuToggled) ?? {};
+  const { isMenuOpen = {toggle: false}, dispatch } = useContext(MenuToggled) ?? {};
 
   const onClick: MenuProps['onClick'] = (e) => {
     setCurrent(e.key);
@@ -100,7 +100,7 @@ const SideMenu: React.FC = () => {
           backgroundColor: '#16b8f314',
         }
       }}
-      toggled={isMenuOpen?.toggle ?? false}
+      toggled={isMenuOpen.toggle}
       breakPoint="lg"
       onBackdropClick={() => {dispatch?.({type: "close"})}}
     >

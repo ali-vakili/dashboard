@@ -5,19 +5,19 @@ import { useMediaQuery } from "react-responsive";
 import SideMenu from "./components/sideMenu/SideMenu";
 import Content from "./components/content/Content";
 import NavBar from './components/navbar/NavBar';
-import { initialState, reducer, ACTIONTYPE } from './components/utils/Menu';
+import { initialState, reducer } from './utils/Menu';
+import type { ActionType, MenuToggleState } from './utils/Menu';
 
 import "./App.scss"
 
 // types
 type MenuContextValue = {
-  isMenuOpen: { toggle: boolean }
-  dispatch: React.Dispatch<ACTIONTYPE>;
+  isMenuOpen: MenuToggleState
+  dispatch: React.Dispatch<ActionType>;
 };
 
-
 // contexts
-export const MenuToggled = createContext<MenuContextValue | undefined>(undefined);
+export const MenuToggled = createContext<MenuContextValue | null>(null);
 export const SmallScreen = createContext(false);
 
 

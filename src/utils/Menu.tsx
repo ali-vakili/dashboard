@@ -1,12 +1,16 @@
 
-type ACTIONTYPE =
-  | { type: "open"; }
-  | { type: "close"; };
+type ActionType = { 
+  type: "open" | "close"; 
+}
+
+type MenuToggleState = {
+  toggle: boolean
+}
 
 
-const initialState: { toggle: boolean } = { toggle: false };
+const initialState = { toggle: false };
 
-const reducer = (state: typeof initialState , action: ACTIONTYPE) => {
+const reducer = (state: MenuToggleState , action: ActionType) => {
   let { toggle } = state;
   
   switch (action.type) {
@@ -26,4 +30,4 @@ const reducer = (state: typeof initialState , action: ACTIONTYPE) => {
 }
 
 export { initialState, reducer };
-export type { ACTIONTYPE };
+export type { ActionType, MenuToggleState };
