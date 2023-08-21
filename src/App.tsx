@@ -1,43 +1,17 @@
-import { createContext, useReducer, useEffect } from 'react';
 import tokens from "./AntDesignTheme.json"
 import { ConfigProvider, theme  } from 'antd';
-import { useMediaQuery } from "react-responsive";
 import SideMenu from "./components/sideMenu/SideMenu";
 import Content from "./components/content/Content";
 import NavBar from './components/navbar/NavBar';
-import { initialState, reducer } from './utils/Menu';
-import type { ActionType, MenuToggleState } from './utils/Menu';
+
+//context providers
+import MenuToggleContextProvider from "./components/contexts/MenuContext";
+import SmallScreenProvider from "./components/contexts/Screen";
 
 import "./App.scss"
 
-// types
-type MenuContextValue = {
-  isMenuOpen: MenuToggleState
-  dispatch: React.Dispatch<ActionType>;
-};
 
-// contexts
-export const MenuToggled = createContext<MenuContextValue | null>(null);
-export const SmallScreen = createContext(false);
-
-
-const App: React.FC = () => {
-
-  const isSmallScreen: boolean = useMediaQuery({ maxWidth: 992 });
-  
-  const [isMenuOpen, dispatch] = useReducer(reducer, initialState);
-
-  const menuContextValue = {
-    isMenuOpen,
-    dispatch
-  };
-
-  useEffect(() => {
-    !isSmallScreen && dispatch({ type: "close" });
-
-  }, [isSmallScreen])
-
-  
+const App = () => {
   return (
     <ConfigProvider
       theme={{
@@ -46,8 +20,8 @@ const App: React.FC = () => {
       }}
     >
       <div className="admin-dashboard">
-        <MenuToggled.Provider value={menuContextValue}>
-          <SmallScreen.Provider value={isSmallScreen}>
+        <MenuToggleContextProvider>
+          <SmallScreenProvider>
             <SideMenu />
             <div className="layout">
               <NavBar />
@@ -55,8 +29,8 @@ const App: React.FC = () => {
                 <Content />
               </div>
             </div>
-          </SmallScreen.Provider>
-        </MenuToggled.Provider>
+          </SmallScreenProvider>
+        </MenuToggleContextProvider>
       </div>
     </ConfigProvider>
   )

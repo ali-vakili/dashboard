@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { MenuToggled } from "../../App"
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { Sidebar, sidebarClasses } from 'react-pro-sidebar';
@@ -13,6 +12,8 @@ import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 
+//contexts
+import { MenuToggle } from '../contexts/MenuContext';
 
 import "./SideMenu.scss"
 
@@ -68,9 +69,9 @@ const items: MenuItem[] = [
   ]),
 ];
 
-const SideMenu: React.FC = () => {
+const SideMenu = () => {
   const [current, setCurrent] = useState('');
-  const { isMenuOpen = {toggle: false}, dispatch } = useContext(MenuToggled) ?? {};
+  const { isMenuOpen = {toggle: false}, dispatch } = useContext(MenuToggle);
 
   const onClick: MenuProps['onClick'] = (e) => {
     setCurrent(e.key);
@@ -102,7 +103,7 @@ const SideMenu: React.FC = () => {
       }}
       toggled={isMenuOpen.toggle}
       breakPoint="lg"
-      onBackdropClick={() => {dispatch?.({type: "close"})}}
+      onBackdropClick={() => {dispatch({type: "close"})}}
     >
 
       <span className='logo' role='logo'>

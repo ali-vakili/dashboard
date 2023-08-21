@@ -1,7 +1,7 @@
 
 import styles from "./Content.module.scss"
 
-const Content : React.FC = () => {
+const Content = () => {
   const currentDate = new Date();
   const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: '2-digit' };
   const formattedDate: string = currentDate.toLocaleString('en-US', options);
